@@ -3,7 +3,7 @@
 ## 1. Overview
 - Brief description of the app and its goals.
 
-## [2. Features](02-features.md)
+## 2. [Features](02-features.md)
 ### 2.1. Feature Name
 - Description
 - User stories
@@ -32,7 +32,7 @@
 - Supported languages
 - Localization strategy
 
-## 7. Platform-specific Notes
+## 7. [Platform-specific Notes](07-platform-notes.md)
 - Browser
 - Mobile (Android/iOS)
 - Desktop
