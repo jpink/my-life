@@ -6,7 +6,7 @@ A user can give AI access to all provided data so it can ask relevant questions 
 
 ### 1.1. Mood tracking
 
-**Description:**  
+**Description:**
 A user can quickly select their current mood from the [Circumplex model](https://en.wikipedia.org/wiki/Emotion_classification#Circumplex_model).  
 Both the user and AI can explore mood history later.
 
@@ -46,3 +46,58 @@ Mood selection is visualized as a circumplex, with 😐 Neutral at the center an
   😞      😌
     😑  🧘
 ```
+
+## 2. Routine module
+
+**Description:**
+Defines customized tasks which repeat cycle is predictable. Shows upcoming, missed and don't break cycle. Those can be marked done and they don't fill calendar, tasks and notifications.
+
+### Parameters
+
+Name|Description|Data Type|Default value
+--|--|--|--
+workingSchedule|Working or studying days and hours.|Repeating intervals|<ul><li>`R/--W-1T08:00/--W-1T16:00`<li>`R/--W-2T08:00/--W-2T16:00`<li>`R/--W-3T08:00/--W-3T16:00`<li>`R/--W-4T08:00/--W-4T16:00`<li>`R/--W-5T08:00/--W-5T16:00`
+morningRoutine|Time after woke up to get work.|Duration|`PT1H30M`
+needForSleep|https://www.kaypahoito.fi/nix02713|Duration|By age:<ul><li>6-13 - `PT10H`<li>14-17 - `PT9H`<li>18-64 - `PT8H`<li>65+ - `PT7H30M`
+
+### Predefined tasks
+
+Definition of done|Importance|Repeat|Expire
+--|--|--|--
+Woke up early|Health, important|Working mornings|Working start - morning routine
+Beard cut|Health|
+Teeth brushed|Health, important|Mornings and evenings
+Breakfast eaten|Health, important|Mornings
+Dishes in the cupboard|Everyday|Mornings
+Lunch eaten|Health, important|T12H/T14H
+Dinner eaten|Health, important|T18H/T20H
+Tomorrow's food planned|Everyday|Daily
+Adequately hydrated|Health, important|Daily
+House is clean|Everyday|Daily
+Laundry washed|Everyday|Daily
+Bed linen washed|Everyday|Weekly
+Nails cut|Health|Monthly
+Hair cut|Health|Monthly
+Seasonal clothes changed|Everyday|Every 6 months
+Carpets washed|Everyday|Yearly
+Windows washed|Everyday|Yearly
+Leaves raked|Everyday|Yearly
+Firewood made|Everyday|Yearly
+Tax return completed|Everyday|Yearly
+Clothes in the closet|Everyday|Daily
+Exercised|Health, important|Three times in a week
+Unnecessary items discarded|Everyday|Weekly
+Dishwashing timed|Everyday|Evenings
+Teeth gaps cleaned|Health, important|Evenings
+Went to bed on time|Health, important|Evenings before work|Working start - morning routine - need for sleep
+Teeth checked|Health, important|Every second year
+
+### Additional tasks
+
+Definition of done|Importance|Repeat|Expire
+--|--|--|--
+Medications taken|Health, important|*Daily*
+Lawn mowed|Everyday|Summer weekly
+Ventilation maintained|Everyday, important|Every 6 months
+Seasonal lighting installed|Everyday|Every 6 months
+Car inspected|Everyday, important|Yearly
