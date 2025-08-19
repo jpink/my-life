@@ -62,8 +62,8 @@ needForSleep|https://www.kaypahoito.fi/nix02713|Duration|By age:<ul><li>6-13 - `
 
 ### Predefined tasks
 
-Definition of done|Importance|Repeat|Expire
---|--|--|--
+Definition of done|Importance|Repeat|Expire|Description
+--|--|--|--|--
 Woke up early|Health, important|Working mornings|Working start - morning routine
 Beard cut|Health|
 Teeth brushed|Health, important|Mornings and evenings
@@ -75,7 +75,8 @@ Tomorrow's food planned|Everyday|Daily
 Adequately hydrated|Health, important|Daily
 House is clean|Everyday|Daily
 Laundry washed|Everyday|Daily
-Bed linen washed|Everyday|Weekly
+Bed linen  washed|Everyday|Weekly
+Bathrooms cleaned|Everyday|Weekly|Toilet and hand towels washed https://www.martat.fi/kodinhoito/siivous/kylpyhuoneen-puhdistus/
 Nails cut|Health|Monthly
 Hair cut|Health|Monthly
 Seasonal clothes changed|Everyday|Every 6 months
