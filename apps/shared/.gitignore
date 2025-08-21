@@ -1,0 +1,6 @@
+.gradle
+.idea
+.kotlin
+.vscode/
+build
+kotlin-js-store
