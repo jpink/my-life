@@ -1,13 +1,13 @@
-package my.life.routine.dsl
+package my.life.routine
 
 import kotlinx.datetime.DayOfWeek
 import kotlinx.serialization.Serializable
 import kotlinx.datetime.LocalTime
 import kotlinx.serialization.Transient
+import my.life.time.Duration
 import my.life.time.Interval
 import my.life.time.Time
 import my.life.time.div
-import kotlin.time.Duration
 
 @Serializable
 class RoutineDefinition(val priority: Int) {
@@ -46,7 +46,7 @@ class Configuration {
         groups[group.toString()] = routines.map { it.toString() }
     }
 
-    fun work(start: Time, workingHours: Duration, travelTime: Duration = Duration.ZERO, vararg days: DayOfWeek) {
+    fun work(start: Time, workingHours: Duration, travelTime: Duration? = null, vararg days: DayOfWeek) {
         val interval = start / workingHours
         days.forEach { working[it] = interval }
     }

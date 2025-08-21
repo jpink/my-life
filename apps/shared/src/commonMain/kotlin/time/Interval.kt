@@ -6,7 +6,6 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlin.time.Duration
 
 /**
  * https://en.wikipedia.org/wiki/ISO_8601 Time interval
@@ -29,8 +28,8 @@ sealed interface Interval {
     val durationAndEnd get() = "$duration/$end"
     companion object {
         fun parse(value: String): Interval {
-            val start = Time.parse(value.substringBefore('/'))
-            val duration = Duration.parse(value.substringAfter('/'))
+            val start = Time.of(value.substringBefore('/'))
+            val duration = Duration.of(value.substringAfter('/'))
             return StartAndDuration(start, duration)
         }
     }

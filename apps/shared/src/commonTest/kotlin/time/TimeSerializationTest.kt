@@ -9,7 +9,7 @@ class TimeSerializationTest {
 
     companion object {
         fun test(actual: String, expected: String = actual) {
-            var time = Time.parse(actual)
+            var time = actual.time
             var json = Json.encodeToString(time)
             val quoted = "\"$expected\""
             assertEquals(quoted, json)

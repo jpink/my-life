@@ -1,12 +1,12 @@
-package my.life.routine.dsl
+package my.life.routine
 
 import kotlinx.datetime.DayOfWeek
-import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.minutes
-import my.life.routine.dsl.DefaultGroup.*
-import my.life.routine.dsl.DefaultPriority.*
-import my.life.routine.dsl.DefaultRoutine.*
+import my.life.routine.DefaultGroup.*
+import my.life.routine.DefaultPriority.*
+import my.life.routine.DefaultRoutine.*
 import my.life.time.hour
+import my.life.time.hours
+import my.life.time.minutes
 
 enum class DefaultRoutine {
     // Meals
@@ -30,7 +30,7 @@ enum class DefaultPriority {
     val value get() = ordinal + 1
 }
 
-val defaults get() = configure {
+fun buildDefaults() = configure {
 
     // Meals https://www.is.fi/hyvaolo/art-2000010110615.html
     priority(VITAL)
