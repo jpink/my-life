@@ -73,6 +73,7 @@ Lunch eaten|Health, important|T12H/T14H
 Dinner eaten|Health, important|T18H/T20H
 Tomorrow's food planned|Everyday|Daily
 Adequately hydrated|Health, important|Daily
+Tomorrow's electricity usage panned|Economic|Daily (14.15 FI)
 House is clean|Everyday|Daily
 Laundry washed|Everyday|Daily
 Bed linen  washed|Everyday|Weekly
@@ -91,6 +92,12 @@ Unnecessary items discarded|Everyday|Weekly
 Dishwashing timed|Everyday|Evenings
 Teeth gaps cleaned|Health, important|Evenings
 Went to bed on time|Health, important|Evenings before work|Working start - morning routine - need for sleep
+Mother's day|Health|Yearly
+Father's day|Health|Yearly
+Valentine's day|Health|Yearly
+Singles Day|Economic|Yearly
+Back Friday|Economic|Yearly
+Cyber Monday|Economic|Yearly
 Teeth checked|Health, important|Every second year
 
 ### Additional tasks

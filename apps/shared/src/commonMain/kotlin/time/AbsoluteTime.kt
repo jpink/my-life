@@ -3,16 +3,31 @@ package my.life.time
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.todayIn
+import kotlinx.serialization.Serializable
 import kotlin.text.toInt
 import kotlin.jvm.JvmInline
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 interface AbsoluteTime : Time
 
 @JvmInline
+@Serializable // TODO
 value class Date(val value: LocalDate) : AbsoluteTime {
+    fun age(timeZone: TimeZone) = todayX(timeZone).let {
+        it.year - value.year - if (it < LocalDate(it.year, value.month, value.day)) 1 else 0
+    }
     constructor(input: CharSequence) : this(LocalDate.parse(input))
     constructor(year: Int = Year.EPOCH, month: Int = 1, day: Int = 1) : this(LocalDate(year, month, day))
     override fun toString() = value.toString()
+    companion object {
+        @OptIn(ExperimentalTime::class)
+        private fun todayX(timeZone: TimeZone) = Clock.System.todayIn(timeZone)
+        @OptIn(ExperimentalTime::class)
+        fun today(timeZone: TimeZone) = Date(todayX(timeZone))
+    }
 }
 
 @JvmInline

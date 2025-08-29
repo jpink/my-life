@@ -17,7 +17,6 @@
 package my.life.time
 
 import kotlinx.datetime.LocalTime
-import kotlinx.datetime.isoDayNumber
 import kotlinx.datetime.number
 import kotlin.jvm.JvmInline
 import my.life.time.Month.*
@@ -29,6 +28,10 @@ interface RelativeTime : Time
 value class ClockTime(val value: LocalTime) : RelativeTime {
     constructor(input: CharSequence) : this(LocalTime.parse(input))
     constructor(hour: Int = 0, minute: Int = 0) : this(LocalTime(hour, minute))
+
+    override fun compareTo(other: Time) = value.compareTo((other as ClockTime).value)
+    override fun plus(other: TemporalAmount) = (value + (other as Duration).wrapped).wrap
+    override fun minus(other: TemporalAmount) = (value - (other as Duration).wrapped).wrap
     override fun toString() = value.toString()
 }
 

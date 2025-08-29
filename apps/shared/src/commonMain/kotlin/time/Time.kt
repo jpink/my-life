@@ -9,13 +9,14 @@ import kotlinx.serialization.encoding.Encoder
 
 /** Time using local timezone. */
 @Serializable(with = Time.Serializer::class)
-sealed interface Time {
+sealed interface Time : Comparable<Time> {
     object Serializer : KSerializer<Time> {
         override val descriptor = PrimitiveSerialDescriptor("Time", PrimitiveKind.STRING)
         override fun serialize(encoder: Encoder, value: Time) = encoder.encodeString(value.serialized)
         override fun deserialize(decoder: Decoder) = of(decoder.decodeString())
     }
     val serialized get() = toString()
+    override fun compareTo(other: Time): Int = TODO()
     operator fun plus(other: TemporalAmount): Time = TODO()
     operator fun minus(other: TemporalAmount): Time = TODO()
     companion object {
