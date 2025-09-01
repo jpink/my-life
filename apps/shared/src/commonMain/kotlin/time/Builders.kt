@@ -5,10 +5,10 @@ import kotlin.time.Duration as KDuration
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
-val Int.dayOfWeek get() = DayOfWeek.of(this)
-val Int.hour get() = ClockTime(this)
-val LocalTime.wrap get() = ClockTime(this)
-fun Int.hour(minute: Int) = ClockTime(this, minute)
+val Int.day get() = Day.of(this)
+val Int.hour get() = Clock(this)
+val LocalTime.wrap get() = Clock(this)
+fun Int.hour(minute: Int) = Clock(this, minute)
 
 val KDuration.wrap get() = Duration(this)
 val Int.hours get() = this.hours.wrap

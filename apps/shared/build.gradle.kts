@@ -38,3 +38,13 @@ kotlin {
         }
     }
 }
+
+tasks.register<Copy>("copyEnglishBundlesToBase") {
+    from("src/jvmMain/resources") { include("**/*_en.properties") }
+    into("src/jvmMain/resources")
+    rename { it.replace("_en.properties", ".properties") }
+}
+
+tasks.named("jvmProcessResources") {
+    dependsOn("copyEnglishBundlesToBase")
+}

@@ -21,18 +21,18 @@ sealed interface Time : Comparable<Time> {
     operator fun minus(other: TemporalAmount): Time = TODO()
     companion object {
         fun of(input: String) = when (input.length) {
-            1 -> DayOfWeek.of(input)                                // 1    known
+            1 -> Day.of(input)                                // 1    known
             2 -> Month.of(input)                                    // 01   known   TODO Prefer
             3 -> Week(input)                                        // W01  known   TODO Prefer
             4 -> when {
                 Month.match(input) -> Month.of(input)               // --01, deprecated TODO postpone
                 Week.match(input) -> Week(input)                    // -W01, unknown    TODO postpone
                 DayOfYear.match(input) -> DayOfYear(input)          // -001, deprecated
-                DayOfWeek.match(input) -> DayOfWeek.of(input)       // -W-1, deprecated, not serialized
+                Day.match(input) -> Day.of(input)       // -W-1, deprecated, not serialized
                 else -> Year(input)                                 // 1970, standard
             }
-            5 -> if (DayOfMonth.match(input)) DayOfMonth(input)     // ---01, deprecated
-                else ClockTime(input)                               // 00:00, standard  TODO T-handling
+            5 -> if (DayNo.match(input)) DayNo(input)     // ---01, deprecated
+                else Clock(input)                               // 00:00, standard  TODO T-handling
             6 -> WeekAndDay(input)                                  // -W01-1, deprecated
             7 -> if (MonthAndDay.match(input)) MonthAndDay(input)   // --01-01, deprecated
                 else YearAndMonth(input)                            // 1970-01, standard

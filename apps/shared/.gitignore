@@ -4,3 +4,5 @@
 .vscode/
 build
 kotlin-js-store
+src/jvmMain/resources/*.properties
+!src/jvmMain/resources/*_*.properties

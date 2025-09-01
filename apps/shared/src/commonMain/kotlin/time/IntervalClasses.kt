@@ -1,7 +1,7 @@
 package my.life.time
 
 data class StartAndDuration(override val start: Time, override val duration: Duration) : Interval {
-    override val end: Time get() = TODO("Not yet implemented")
+    override val end: Time get() = start + duration
     override fun toString() = startAndEnd
 }
 

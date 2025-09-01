@@ -18,25 +18,29 @@ package my.life.time
 
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.number
+import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 import my.life.time.Month.*
 import my.life.time.Quarter.*
 
 interface RelativeTime : Time
 
+/** Clock time */
+@Serializable
 @JvmInline
-value class ClockTime(val value: LocalTime) : RelativeTime {
+value class Clock(val value: LocalTime) : RelativeTime {
     constructor(input: CharSequence) : this(LocalTime.parse(input))
     constructor(hour: Int = 0, minute: Int = 0) : this(LocalTime(hour, minute))
 
-    override fun compareTo(other: Time) = value.compareTo((other as ClockTime).value)
+    override fun compareTo(other: Time) = value.compareTo((other as Clock).value)
     override fun plus(other: TemporalAmount) = (value + (other as Duration).wrapped).wrap
     override fun minus(other: TemporalAmount) = (value - (other as Duration).wrapped).wrap
     override fun toString() = value.toString()
 }
 
+/** Day of month. */
 @JvmInline
-value class DayOfMonth(val value: Int = 1) : RelativeTime {
+value class DayNo(val value: Int = 1) : RelativeTime {
     constructor(input: String) : this(input.removePrefix(PREFIX).toInt())
     override fun toString() = format(value)
     companion object {
@@ -47,19 +51,21 @@ value class DayOfMonth(val value: Int = 1) : RelativeTime {
 }
 
 /** Day of week numbers are standard even week start may change */
-enum class DayOfWeek : RelativeTime {
+enum class Day : RelativeTime {
     Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
     val number get() = ordinal + 1
     override val serialized get() = format1(number)
     val wrapped get() = kotlinx.datetime.DayOfWeek.entries[ordinal]
+    operator fun dec() = if (this == Monday) Sunday else entries[ordinal - 1]
+    operator fun inc() = if (this == Sunday) Monday else entries[ordinal + 1]
     companion object {
         const val PREFIX = "-W-"
         fun format1(number: Int) = number.toString()
         fun format4(number: Int) = PREFIX + number
         fun match(input: String) = input.startsWith(PREFIX)
         fun of(input: String) = of(input.removePrefix(PREFIX).toInt())
-        fun of(number: Int) = DayOfWeek.entries[number - 1]
-        fun of(kotlinx: kotlinx.datetime.DayOfWeek) = DayOfWeek.entries[kotlinx.ordinal]
+        fun of(number: Int) = Day.entries[number - 1]
+        fun of(kotlinx: kotlinx.datetime.DayOfWeek) = Day.entries[kotlinx.ordinal]
     }
 }
 
@@ -87,11 +93,11 @@ enum class Month : RelativeTime {
     }
 }
 
-data class MonthAndDay(val month: Month = January, val day: DayOfMonth = DayOfMonth()) : RelativeTime {
-    constructor(input: String) : this(Month.of(input.take(4)), DayOfMonth(input.substring(5)))
+data class MonthAndDay(val month: Month = January, val day: DayNo = DayNo()) : RelativeTime {
+    constructor(input: String) : this(Month.of(input.take(4)), DayNo(input.substring(5)))
     override fun toString() = format(month, day)
     companion object {
-        fun format(month: Month, day: DayOfMonth) = "$month-${day.value.pad}"
+        fun format(month: Month, day: DayNo) = "$month-${day.value.pad}"
         fun match(input: String) = Month.match(input)
     }
 }
@@ -137,10 +143,10 @@ value class Week(val value: Int = 1) : RelativeTime {
     }
 }
 
-data class WeekAndDay(val week: Week = Week(), val day: DayOfWeek = DayOfWeek.Monday) : RelativeTime {
-    constructor(input: String) : this(Week(input.take(4)), DayOfWeek.of(input.substring(5)))
+data class WeekAndDay(val week: Week = Week(), val day: Day = Day.Monday) : RelativeTime {
+    constructor(input: String) : this(Week(input.take(4)), Day.of(input.substring(5)))
     override fun toString() = format(week, day)
     companion object {
-        fun format(week: Week, day: DayOfWeek) = "$week-${day.number}"
+        fun format(week: Week, day: Day) = "$week-${day.number}"
     }
 }
