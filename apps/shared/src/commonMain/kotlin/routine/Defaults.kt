@@ -24,12 +24,13 @@ const val NIGHT = "night"
 
 // Referenced routines
 const val BREAKFAST = "breakfast"
+const val WORK = "work"
 
 fun configure(location: String, birth: Date, params: Params.() -> Unit, block: Config.() -> Unit) =
     Config(Params(Country(location), birth).apply(params)).apply {
         // Activity is the starting point of definitions
         group(ACTIVITY) {
-            daily("work", ECONOMIC, 8.hour, 8.hours) {
+            daily(WORK, ECONOMIC, 8.hour, 8.hours) {
                 days = Day.entries.take(5)
                 travel = 25.minutes
             }

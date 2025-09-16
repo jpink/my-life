@@ -6,7 +6,7 @@ import my.life.time.Day
 
 class DailyPlan(val config: Config, val day: Day) {
     /** Activity start of the day. */
-    var start = config.params.dayStart
+    //TODO remove var start = config.params.dayStart
 
     val events = mutableListOf<Event>()
 
@@ -21,6 +21,6 @@ class DailyPlan(val config: Config, val day: Day) {
     operator fun plus(routine: Routine) {
         routine.plan(config, this)
         events.sort()
-        if (routine.activity) start = events.first { it.routine.activity }.time as Clock
+        //TODO remove if (routine.activity) start = events.first { it.routine.activity }.time as Clock
     }
 }

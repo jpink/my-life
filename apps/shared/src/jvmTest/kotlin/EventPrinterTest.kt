@@ -6,34 +6,34 @@ import kotlin.test.assertEquals
 
 class EventPrinterTest {
     @Test fun planMondayByAverage() = assertEquals("""
-                 6:36 AM > uni
-                 6:51 AM ) uni
-                 6:52 AM < parta
-                 6:57 AM > parta
-                 6:58 AM < hampaat
-                 7:02 AM > hampaat
-                 7:03 AM < astiat kaappiin
-                 7:13 AM > astiat kaappiin
-                 7:14 AM < aamupala
-                 7:34 AM > aamupala
-                 7:35 AM ( työ
-                 8:00 AM < työ
-                11:00 AM < lounas
-                11:30 AM > lounas
-                 2:00 PM < sähkön hinta
-                 2:02 PM > sähkön hinta
-                 2:30 PM < välipala
-                 2:40 PM > välipala
-                 4:00 PM > työ
-                 5:00 PM < päivällinen
-                 5:45 PM > päivällinen
-                 8:00 PM < iltapala
-                 8:20 PM > iltapala
-                 8:30 PM < astianpesu
-                 8:40 PM > astianpesu
-                 9:00 PM < hammasvälit
-                 9:05 PM > hammasvälit
-                10:36 PM < uni
+                 6:36 AM > sleep
+                 6:51 AM ) sleep
+                 6:52 AM < beard
+                 6:57 AM > beard
+                 6:58 AM < teeth
+                 7:02 AM > teeth
+                 7:03 AM < dishes to cupboard
+                 7:13 AM > dishes to cupboard
+                 7:14 AM < breakfast
+                 7:34 AM > breakfast
+                 7:35 AM ( work
+                 8:00 AM < work
+                11:00 AM < lunch
+                11:30 AM > lunch
+                 2:00 PM < electricity price
+                 2:02 PM > electricity price
+                 2:30 PM < snack
+                 2:40 PM > snack
+                 4:00 PM > work
+                 5:00 PM < dinner
+                 5:45 PM > dinner
+                 8:00 PM < supper
+                 8:20 PM > supper
+                 8:30 PM < dishwash
+                 8:40 PM > dishwash
+                 9:00 PM < teeth gaps
+                 9:05 PM > teeth gaps
+                10:36 PM < sleep
         """.trimIndent(), EventPrinter(average).printPlan(Day.Monday))
 
     @Test fun planMondayForJukka() = assertEquals("""

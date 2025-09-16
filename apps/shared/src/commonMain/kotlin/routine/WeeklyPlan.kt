@@ -9,13 +9,16 @@ class WeeklyPlan(val config: Config) {
 
     fun plan(): WeeklyPlan {
         if (!planned) {
-            config.routines.filter { it.base == Daily }.forEach { routine ->
-                routine.days.forEach { get(it) + routine }
-            }
+            val daily = config.routines.filter { it.base == Daily }
+            daily.filter { it.group == ACTIVITY }.plan() // Plan activities first
+            daily.filter { it.group == NIGHT }.plan()
+            daily.filter { it.group != ACTIVITY && it.group != NIGHT }.plan() // Then rest
             planned = true
         }
         return this
     }
+
+    private fun List<Routine>.plan() = forEach { routine -> routine.days.forEach { get(it) + routine } }
 
     operator fun get(day: Day) = dayPlans.getValue(day)
 }

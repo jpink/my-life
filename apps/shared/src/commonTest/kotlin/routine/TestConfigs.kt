@@ -1,7 +1,11 @@
 package my.life.routine
 
 import my.life.time.Date
+import my.life.time.Day
+import my.life.time.Day.*
 import my.life.time.Month.*
+import my.life.time.hour
+import my.life.time.hours
 import my.life.time.minutes
 
 val average = configure("US", Date(1994), { man = true }) {}
@@ -11,9 +15,16 @@ val jukka = configure("FI", Date(1983, 5, 4), {
     man = true
     townHouse = true
 }) {
-    // Title - Information
-    // Nimeke - Tiedot
+    group(ACTIVITY) {
+        daily(WORK, ECONOMIC, 8.hour, 8.hours) {
+            days = Day.entries.take(5) - Tuesday
+        }
+        daily("$WORK.2", ECONOMIC, 7.hour, 8.hours) {
+            days(Tuesday)
+        }
+    }
 
+    // TODO children's school start
     daily("lääkkeet otettu", HEALTH, 1.minutes)
     daily("maski pesty", HEALTH, 3.minutes) { before = BREAKFAST }
     daily("vatsat treenattu", WELFARE, 10.minutes)

@@ -40,11 +40,22 @@ kotlin {
 }
 
 tasks.register<Copy>("copyEnglishBundlesToBase") {
+    group = "build"
+    description = "Copies English Resource Bundles to base bundles and that way system default locale is overridden."
     from("src/jvmMain/resources") { include("**/*_en.properties") }
     into("src/jvmMain/resources")
     rename { it.replace("_en.properties", ".properties") }
 }
 
-tasks.named("jvmProcessResources") {
-    dependsOn("copyEnglishBundlesToBase")
+tasks.register<Delete>("cleanBaseBundles") {
+    group = "build"
+    description = "Removes base ResourceBundle files, because they are created by English on build."
+    delete(fileTree("src/jvmMain/resources") {
+        include("*.properties")
+        exclude("*_*.properties")
+    })
 }
+
+tasks.named("jvmProcessResources") { dependsOn("copyEnglishBundlesToBase") }
+
+tasks.named("clean") { dependsOn("cleanBaseBundles") }

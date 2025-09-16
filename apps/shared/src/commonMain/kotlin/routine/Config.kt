@@ -2,6 +2,7 @@ package my.life.routine
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import my.life.common.replaceOrAdd
 import my.life.time.Day
 import my.life.time.Duration
 import my.life.time.Interval
@@ -16,7 +17,6 @@ import kotlin.collections.set
 @Serializable
 class Config(val params: Params) {
     val routines = mutableListOf<Routine>()
-    //private val groups = mutableMapOf<String, Set<String>>()
 
     @Transient private var default = true
     @Transient private var groupId: String? = null
@@ -82,18 +82,10 @@ class Config(val params: Params) {
             }
             if (reversed) beforeRoutineId = id
             init(this)
-            routines.add(this)
+            routines.replaceOrAdd(this) { it.id == id }
         }
 
     private fun disable(id: String) {}
-
-    /*fun group(group: String, vararg routines: String) {
-        groups[group] = routines.toSet()
-    }
-
-    fun groupAdd(group: String, vararg routines: String) {
-        groups[group] = groups.getValue(group) + routines.toSet()
-    }*/
 
     fun defaultsSet() { default = false }
 
